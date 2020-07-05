@@ -11,3 +11,15 @@ class Item:
 
     def on_drop(self):
         print('You have dropped the', self.name)
+
+
+class LightSource(Item):
+    pass
+
+
+class Treasures(Item):
+    pass
+
+
+class Weapons(Item):
+    pass

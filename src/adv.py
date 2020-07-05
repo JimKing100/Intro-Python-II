@@ -3,7 +3,9 @@
 # Imports
 from room import Room
 from player import Player
-from item import Item
+from item import Treasures
+from item import LightSource
+from item import Weapons
 
 
 # Declare all the rooms
@@ -28,8 +30,7 @@ the distance, but there is no way across the chasm."""),
 to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+chamber! It is filled with treasure, but no diamonds. The only exit is to the south."""),
 }
 
 # Link rooms together
@@ -47,12 +48,30 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
 # Create items
-sword = Item('sword', 'the sword of zorro')
-coins = Item('coins', 'a hundred ducats')
+coins = Treasures('coins', 'a hundred ducats')
+gold = Treasures('gold', 'a bar of gold')
+silver = Treasures('silver', 'a bar of silver')
+diamonds = Treasures('diamonds', 'a bag of diamonds')
+
+lamp = LightSource('lamp', 'a gas lamp')
+flashlight = LightSource('flashlight', 'a large flashlight')
+torch = LightSource('torch', 'an oil torch')
+
+sword = Weapons('sword', 'the sword of zorro')
+crossbow = Weapons('crossbow', 'a crossbow with arrows')
+knife = Weapons('knife', 'a bowie knife')
+club = Weapons('club', 'a large wooden club')
 
 # Add items to rooms
 room['outside'].add_item(sword)
-room['outside'].add_item(coins)
+room['outside'].add_item(torch)
+room['foyer'].add_item(crossbow)
+room['foyer'].add_item(flashlight)
+room['narrow'].add_item(lamp)
+room['treasure'].add_item(silver)
+room['treasure'].add_item(gold)
+room['grotto'].add_item(coins)
+room['sunroom'].add_item(diamonds)
 
 #
 # Main
