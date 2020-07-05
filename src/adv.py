@@ -71,7 +71,9 @@ room['narrow'].add_item(lamp)
 room['treasure'].add_item(silver)
 room['treasure'].add_item(gold)
 room['grotto'].add_item(coins)
+room['grotto'].add_item(club)
 room['sunroom'].add_item(diamonds)
+room['overlook'].add_item(knife)
 
 #
 # Main
