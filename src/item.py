@@ -12,13 +12,22 @@ class Item:
     def on_drop(self):
         print('You have dropped the', self.name)
 
+    def isTreasure(self):
+        return False
+
 
 class LightSource(Item):
     pass
 
 
 class Treasures(Item):
-    pass
+    def __init__(self, name, description, value):
+        self.value = value
+
+        Item.__init__(self, name, description)
+
+    def isTreasure(self):
+        return True
 
 
 class Weapons(Item):

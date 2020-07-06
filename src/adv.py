@@ -48,10 +48,10 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
 # Create items
-coins = Treasures('coins', 'a hundred ducats')
-gold = Treasures('gold', 'a bar of gold')
-silver = Treasures('silver', 'a bar of silver')
-diamonds = Treasures('diamonds', 'a bag of diamonds')
+coins = Treasures('coins', 'a hundred ducats', 100)
+gold = Treasures('gold', 'a bar of gold', 200)
+silver = Treasures('silver', 'a bar of silver', 100)
+diamonds = Treasures('diamonds', 'a bag of diamonds', 200)
 
 lamp = LightSource('lamp', 'a gas lamp')
 flashlight = LightSource('flashlight', 'a large flashlight')
@@ -93,7 +93,7 @@ room['overlook'].add_item(knife)
 # If the user enters "q", quit the game.
 
 program = 0
-command_verbs = {'n', 's', 'e', 'w', 'i', 'q', 'get', 'take', 'drop', 'inventory'}
+command_verbs = {'n', 's', 'e', 'w', 'i', 'q', 'get', 'take', 'drop', 'inventory', 'score'}
 current_room = room['outside']
 player1 = Player('Player 1', current_room)
 
@@ -103,7 +103,7 @@ for item in current_room.list:
     print(item.name)
 
 while program == 0:
-    entry_text = input('Enter a command (n,s,e,w,i,q,get item,take item,drop item,inventory): ')
+    entry_text = input('Enter a command (n,s,e,w,i,q,get [item],take [item],drop [item],inventory,score): ')
     words = entry_text.split()
 
     command = ' '
@@ -138,7 +138,10 @@ while program == 0:
             else:
                 print(player1.name, 'has these items:')
                 for item in player1.list:
-                    print(item.name)
+                    if item.isTreasure() is True:
+                        print(item.name, 'value is', item.value)
+                    else:
+                        print(item.name)
         if (command == 'get') | (command == 'take'):
             for item in current_room.list:
                 if item.name == object:
@@ -157,6 +160,8 @@ while program == 0:
                     break
                 else:
                     print('No such object in inventory')
+        if (command == 'score'):
+            print('To win you must score 400 points, you have', player1.score, 'points')
 
         if error_code == 0:
             player1.current_room = current_room
@@ -166,7 +171,10 @@ while program == 0:
             else:
                 print('Items visible:')
                 for item in current_room.list:
-                    print(item.name)
+                    if item.isTreasure() is True:
+                        print(item.name, 'value is', item.value)
+                    else:
+                        print(item.name)
         else:
             print('There is no room in this direction!')
         if command == 'q':
