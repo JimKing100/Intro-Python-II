@@ -22,9 +22,8 @@ class LightSource(Item):
 
 class Treasures(Item):
     def __init__(self, name, description, value):
+        super().__init__(name, description)
         self.value = value
-
-        Item.__init__(self, name, description)
 
     def isTreasure(self):
         return True
